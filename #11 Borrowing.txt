@@ -1,0 +1,168 @@
+In #16 Ownership.txt Atlast we noted we can return multiple values using a tuple
+which is useful when we want to regain access of the value in the scopre where
+it was orginally passed into a function that returned some value along with the 
+parameter it took. The problem is it is tedious to move ownership twice to 
+use it inside another function and then back in the home function
+
+What is a reference?
+In simple terms, a reference in Rust (&T or &mut T) is like a
+borrowed address of a value. It lets you access data without owning it. 
+Rust makes sure references are always valid, so you don’t have to worry 
+about memory issues.
+
+These ampersands represent references - &String
+and they allow you to refer to some value without taking ownership of it
+
+    fn main() {
+        let s1 = String::from("hello"); //s1 owns the value hello 
+        //and s1 has a pointer on the stack that leads to the value on the heap
+
+        let len = calculate_length(&s1); //the calculate_length function borrows
+        value of s1 by referring to. It only has read only properties. No modificat
+        ion rights. so you cannot use push_str function on s1's value
+
+        //Since s1 still owns the value the macro below is a valid statement
+        println!("The length of '{s1}' is {len}.");
+    }
+
+    fn calculate_length(s: &String) -> usize {
+        s.len() //return s's length ie - moving the ownership of s.len() to 
+        //the variable len
+    } // Here, s goes out of scope. But because s does not have ownership of what
+    // it refers to, the value is not dropped.
+
+When functions have references as parameters instead of the actual values,
+we won’t need to return the values in order to give back ownership, because 
+we never had ownership.
+
+We call the action of creating a reference borrowing
+
+    fn main() {
+        let mut s = String::from("hello");
+
+        change(&mut s);
+    }
+
+    fn change(some_string: &mut String) {
+        some_string.push_str(", world");
+    }
+
+we create a mutable reference with &mut s where we call the change function,
+and update the function signature to accept a mutable reference with some_string:
+&mut String. This makes it very clear that the change function will mutate the
+value it borrows.
+The value of s will change because change(&mut s) borrows s mutably
+and modifies it.
+
+Restriction of Mutable Refrences: You cannot have more than 1 mutable 
+refrence in 1 scope. You cannot have 1 mutable refrence and 1 immutable refrence
+in the same scope
+You can borrow stack values too.
+
+    let mut s = String::from("hello");
+
+    let r1 = &mut s;
+    let r2 = &mut s; //Problem with this line
+
+    println!("{}, {}", r1, r2);
+
+Mutable refrences in different scope
+    let mut s = String::from("hello");
+
+    {
+        let r1 = &mut s;
+    } // r1 goes out of scope here, so we can make a new reference with no problems.
+
+    let r2 = &mut s; ///No Problem
+
+Existence of mutable and immutable refrence together is a BIG PROBLEM
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    let r3 = &mut s; // BIG PROBLEM
+
+
+
+What you can have
+Multiple immutable refrences in the same scope. Since no one is modifying what they
+are reading. They will be at peace
+A mutable reference (&mut) modifies the original value.
+
+Note that a reference’s (whether mutable or not) scope starts 
+from where it is introduced and continues through the *last time* 
+that reference is used.
+
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    
+    println!("{r1} and {r2}");
+    // variables r1 and r2 will not be used after this point. This was the last
+    time they were used
+
+    let r3 = &mut s; // no problem
+    println!("{r3}");
+}
+
+fn main() {
+    let mut s = String::from("Hello");
+
+    let r1 = &mut s; // Mutable reference starts here
+    println!("{}", r1); // Last use of `r1`
+    
+    let r2 = &mut s; // ✅ Allowed because `r1` is no longer used
+    println!("{}", r2);
+}
+
+✅ Immutable references (&T) can be borrowed freely (multiple times).
+❌ Mutable references (&mut T) cannot be borrowed while still in use.
+
+fn main() {
+    let s = String::from("Hello");
+
+    let r1 = &s; // Immutable reference
+    let r2 = &r1; // Borrowing from an immutable reference
+
+    println!("{}", r2); // ✅ Works fine!
+}
+
+fn main() {
+    let mut s = String::from("Hello");
+
+    let r1 = &mut s; // Mutable reference
+    let r2 = &r1; // ❌ ERROR: Cannot borrow `r1` while it is used mutably
+
+    println!("{}", r2);
+}
+
+A dangling pointer (or dangling reference) occurs when a reference points to memory
+that has been freed or is no longer valid
+
+fn main() {
+    let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    &s❌
+}
+//Error:this function's return type contains a borrowed value, but there is no value
+for it to be borrowed from
+
+Because s is created inside dangle, when the code of dangle is finished, s will be deallocated. 
+But we tried to return a reference to it. That means this reference would be pointing to an
+invalid String. As the original value was cleaned up when s got out of scope
+That’s no good! Rust won’t let us do this. instead we can move ownershp of s by using just s
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    s✅
+}
+Ownership is moved out, and nothing is deallocated.
+Rust doesn’t let you mutate or even shadow a value while it’s still borrowed, even immutably
+A tuple no matter if some of its values are heap allocated is stored on stack nevertheless.

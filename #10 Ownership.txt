@@ -1,0 +1,192 @@
+Ownership is a set of rules that govern how a Rust program manages memory
+Some languages have garbage collection that regularly looks for no-longer-used memory as the program runs;
+in other languages, the programmer must explicitly allocate and free the memory
+Rust takes a third approach
+
+
+Adding data is called pushing onto the stack, and removing data is called popping off the stack.
+All data stored on the stack must have a known, fixed size. Data with an unknown size at compile time or a size 
+that might change must be stored on the heap instead.
+
+The memory allocator finds an empty spot in the heap that is big enough,
+marks it as being in use, and returns a - pointer, which is the address of that location
+
+Because the pointer to the heap is a known, fixed size data, you can store the pointer on the stack,
+but when you want the actual data, you must follow the pointer.
+
+Pushing to the stack is faster than allocating on the heap because the pusher never
+has to search for a place to store new data; that location is always at the top of the stack.
+
+
+_What Ownership addresses_
+Keeping track of what parts of code are using what data on the heap, minimizing the amount of duplicate data on the heap, and cleaning up unused data on the heap 
+so you don’t run out of space are all problems that ownership addresses. 
+
+The 3 Ownership rules are
+1. Each value in Rust has an owner.
+2. There can only be one owner at a time.
+3. When the owner goes out of scope, the value will be dropped.
+
+//. A scope is the range within a program for which an item is valid
+
+_The String Type_
+&str cannot be mutated but String can be mutated
+    let mut s = String::from("hello");
+
+    s.push_str(", world!"); // push_str() appends a literal to a String
+
+    println!("{s}"); // This will print `hello, world!`
+
+//In the case of a string literal, we know the contents at compile time, so the text is hardcoded directly into the final executable.
+This is why string literals are fast and efficient. But these properties only come from the string literal’s immutability. 
+
+With the String type, in order to support a mutable, growable piece of text, we need to allocate an amount of memory on the heap, 
+unknown at compile time, to hold the contents
+
+1. The memory must be requested from the memory allocator at runtime.
+2. We need a way of returning this memory to the allocator when we’re done with our String.
+
+That first part is done by us: when we call String::from, its implementation requests the memory it needs. 
+This is pretty much universal in programming languages.
+
+In the second part.
+In most languages without a GC, it’s our responsibility to identify when memory is no longer being used and to call
+code to explicitly free it, just as we did to request it
+Doing this correctly has historically been a difficult programming problem. If we forget, we’ll waste memory.
+ If we do it too early, we’ll have an invalid variable. If we do it twice, that’s a bug too. 
+
+In Rust. The memory is automatically freed once the variable that owns it goes out of scope. 
+Rust calls a special function for us. This function is called drop, and it’s where the author of String can put the code to return the memory.
+Rust calls drop automatically at the closing curly bracket.
+====
+It may seem simple right now, but the behavior of code can be unexpected in more complicated situations 
+when we want to have multiple variables use the data we’ve allocated on the heap
+
+    let x = 5;
+    let y = x;
+Assigning the integer value of variable x to y We can probably guess what this is doing: “bind the value 5 to x; then make a copy 
+of the value in x and bind it to y.” We now have two variables, x and y, and both equal 5. This is indeed what is happening, 
+because integers are simple values with a known, fixed size, and these two 5 values are pushed onto the stack.
+
+    let s1 = String::from("hello");
+    let s2 = s1;
+This looks very similar, so we might assume that the way it works would be the same: that is, 
+the second line would make a copy of the value in s1 and bind it to s2
+
+A string has 3 properties along with the pointer that is length and capacity.
+length (size) is the actual number of elements, while capacity is the allocated space for storing them.
+Only these 3 copied properties are applied to S2. The data on the heap is not copied to create another copy for the s2 variable
+
+Earlier, we said that when a variable goes out of scope, Rust automatically calls the drop function and cleans
+up the heap memory for that variable. But Figure 4-2 shows both data pointers pointing to the same location. 
+This is a problem: when s2 and s1 go out of scope, they will both try to free the same memory.
+This is known as a double free error and is one of the memory safety bugs we mentioned previously.
+
+To ensure memory safety, after the line let s2 = s1;, Rust considers s1 as no longer valid. 
+Therefore, Rust doesn’t need to free twice when s1 and s2 go out of scope. 
+Check out what happens when you try to use s1 after s2 is created; it won’t work:
+
+This code does not compile!
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{s1}, world!");
+
+If you’ve heard the terms shallow copy and deep copy while working with other languages, 
+the concept of copying the pointer, length, and capacity without copying the data probably sounds like making a
+shallow copy. But because Rust also invalidates the first variable, instead of being called a shallow copy, 
+it’s known as a move.
+
+When you assign a completely new value to an existing variable whose data is stored on the heap,
+Rust will call drop and free the original value’s memory immediately. And assing the new value in its space
+    let mut s = String::from("hello");
+    s = String::from("ahoy");
+
+    println!("{s}, world!");
+
+If we do want to deeply copy the heap data of the String
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {s1}, s2 = {s2}");
+
+Copying data on stack
+
+    let x = 5;
+    let y = x;
+
+    println!("x = {x}, y = {y}");
+The code above is valid. But this code seems to contradict what we just 
+learned: we don’t have a call to clone, but x is still valid and wasn’t 
+moved into y
+The reason is that types such as integers that have a known size at compile time 
+are stored entirely on the stack, so copies of the actual values are quick to
+make. That means there’s no reason we would want to prevent x from being valid 
+after we create the variable y
+
+Integers (i8, i16, i32, i64, i128, u8, u16, u32, u64, u128, isize, usize)
+Floating-Point Numbers (f32, f64)
+Booleans (bool)
+Characters (char)
+Small Arrays [i32; 6]
+tuples with data type that are stored in stack (i32, u32, iSize, iSize) etc
+
+Above data types are stored on stack and when they are copied. Their value are
+copied for assigning to a new variable. They are said to have the Copy trait
+
+The mechanics of passing a value to a function are similar to those when assigning
+ a value to a  variable. Passing a variable to a function will move or copy, 
+ just as assignment does
+
+    fn main() {
+        let s = String::from("hello");  // s comes into scope
+
+        takes_ownership(s);             // s's value moves into the function...
+                                        // ... and so is no longer valid here
+
+        let x = 5;                      // x comes into scope
+
+        makes_copy(x);                  // because i32 implements the Copy trait,
+                                        // x does NOT move into the function,
+        println!("{}", x);              // so it's okay to use x afterward
+
+    } // Here, x goes out of scope, then s. But because s's value was moved, nothing
+    // special happens.
+
+    fn takes_ownership(some_string: String) { // some_string comes into scope
+        println!("{some_string}");
+    } // Here, some_string goes out of scope and `drop` is called. The backing
+    // memory is freed.
+
+    fn makes_copy(some_integer: i32) { // some_integer comes into scope
+        println!("{some_integer}");
+    } // Here, some_integer goes out of scope. Nothing special happens.
+
+The ownership of a variable follows the same pattern every time: assigning a value
+to another variable moves it. When a variable that includes data on the heap goes
+out of scope, the value will be cleaned up by drop unless ownership of the data
+has been moved to another variable.
+
+While this works, taking ownership and then returning ownership with every 
+function is a bit tedious. What if we want to let a function use a value but 
+not take ownership? It’s quite annoying that anything we pass in also needs to 
+be passed back if we want to use it again, in addition to any data resulting
+from the body of the function that we might want to return as well.
+
+Rust does let us return multiple values using a tuple.
+
+
+    fn main() {
+        let s1 = String::from("hello");
+
+        let (s2, len) = calculate_length(s1);
+
+        println!("The length of '{s2}' is {len}.");
+    }
+
+    fn calculate_length(s: String) -> (String, usize) {
+        let length = s.len(); // len() returns the length of a String
+
+        (s, length)
+    }
+

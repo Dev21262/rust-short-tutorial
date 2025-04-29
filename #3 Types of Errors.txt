@@ -1,0 +1,23 @@
+Runtime Errors
+✅ Happens while the program is running (after compiling).
+✅ Crashes the program unexpectedly if not handled.
+✅ Caused by:
+
+Dividing by zero
+Accessing out-of-bounds array indexes
+Integer overflow in debug mode
+Trying to unwrap a None value
+
+
+Compile-Time Errors
+✅ Happens while compiling the code (before execution).
+✅ Prevents the program from running until fixed.
+✅ Caused by:
+
+Syntax errors (wrong Rust syntax)
+Type errors (mismatched data types)
+Missing variables or functions
+
+Panic in Rust is a runtime error that causes the program to immediately terminate and 
+unwind the call stack unless explicitly handled.
+

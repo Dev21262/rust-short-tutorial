@@ -1,0 +1,92 @@
+__________________________________________
+Computer has two resources
+#Computation - CPU is responsible for this
+  Computation allows to do Math
+
+
+#Memory
+    -Persistent Memory
+        Slow to Read and Write, Abundant, Permanent, Stored in Hard Drives, Pendrives and Discs
+    -Volatile Memory 
+        Fast to Read and Write, Scarce, Temporary, Stored in RAM
+
+
+In Programming Memory Management is to manage how data is being in the volatile memory
+
+#Regions in Volatile Memory
+- Static (or Data) Memory
+    Stores global (Both Mutable and Immutable), constants and static variables.
+    String Literals.
+    Program's Binary
+    Allocated at program startup and exists throughout the program’s execution.
+    Does not shrink or grow dynamically like stack or heap.
+
+- Heap Memory
+    Used for dynamic memory allocation
+    In Rust IT is Manually managed (you must free memory after use to prevent leaks).
+    Larger than the stack but slower due to manual allocation/deallocation.
+    Can cause memory fragmentation if not managed well.
+    Unknown size at compile time
+    Large values are stored here.
+    The lifetime of memory in heap is determined by the programmer (Manually) or controlled by a garbage collector
+
+- Stack Memory
+    Pointers to memory
+    Stores local variables, function parameters, and return addresses.
+    Follows LIFO (Last In, First Out) order.
+    Fast allocation and deallocation (happens automatically when a function is called and returns).
+    Limited size → Can cause stack overflow if overused (e.g., deep recursion).
+    There is an upper limit. Heap can increase its size all upto the system's RAM. But for Stack the max size is usually 2MB
+    Information related to calling of function is stored
+    Cleaned automatically once the function ends
+
+
+
+Primary Memory: Includes both volatile (e.g., RAM) and non-volatile (e.g., ROM) memory.
+
+Secondary Memory: Typically non-volatile. Includes Hard Disks, Pendrives
+
+Memory fragmentation occurs when free memory is divided into small, non-contiguous blocks, 
+making it difficult to allocate large chunks of memory
+
+A memory leak happens when a program forgets to free up memory that is no longer needed. Over time, this unused memory
+keeps piling up, reducing available RAM and slowing down the system
+
+Without the return address, the computer wouldn't know where to go next after a function finishes.
+Return address for eg in the middle of a function another function happens then after it is finished we must
+return to the specifice line of the original function. This is achieved by Return address
+
+Binary simply means data stored in form of 1s and 0s
+Machine code is binary but with instructions on how to execute it in a computer. Typically an .exe file
+
+.png is a binary file without any executions
+__________________________________________
+Memory Management on the Heap with Different Programming Languages
+
+Manual (Eg:- C, Assembly, Pascal)
+    - Pros
+        Full Control
+        Efficient when discussing about consumption of RAM
+    - Cons
+        Very Tedious and Difficult
+        Error Prone
+
+Semi-Automatic (Eg:- C++ (with RAII), RUST (with OBRM))
+    - Pros
+        Full Control
+        Efficient when discussing about consumption of RAM
+        Almost Error Free
+    - Cons
+        Somewhat Tedious
+Automatic (Eg:- Javascript, Python, Java)
+    - Pros
+        Extremely Easy
+        Error Free
+    - Cons
+        Not Efficient when discussing about consumption of RAM
+        No Control overy Memory Management
+
+C++ uses the pattern RAII (Resource Acquistion is Intialization)
+In RAII, a resource is anything that needs to be acquired and properly released (management), like memory, files, or locks.
+Eg - Heap Allocated Memory, Network sockets, File Handles, Database Handles etc
+Manual Resource management is error prone and owndership is ambiguous

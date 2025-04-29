@@ -1,0 +1,21 @@
+#Backend
+    In web development, the backend refers to the server-side of a website or
+    web application. It is responsible for handling data, processing requests,
+    and ensuring the functionality of the application. Unlike the frontend, 
+    which deals with the user interface, the backend works behind the scenes
+    to store, retrieve, and manipulate data.
+
+#Servers
+    A server is a computer or software that provides services, data, or 
+    resources to other computers, known as clients, over a network. Servers
+    handle requests from clients and respond with the necessary information or
+    actions. They are a fundamental part of the internet and web development.
+
+Web Server – Hosts websites and serves web pages to users. Example: Apache, Nginx.
+Database Server – Stores and manages databases. Example: MySQL, PostgreSQL.
+
+APIs are the bridge between front end and backend. They are the rules 
+and protocols which followed will allow one to interact with the backend.
+APIs are not just limited to frontend-backend communication; they can also
+enable backend-to-backend interactions, like microservices communicating
+with each other.

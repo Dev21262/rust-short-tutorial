@@ -1,0 +1,88 @@
+ 👩‍💻 Compiled Languages (e.g., Rust, C, C++, Go)
+
+ How It Works:
+The entire code is converted into machine code using a compiler (e.g., rustc for Rust).
+This machine code is then executed directly by the CPU.
+✅ Pros:
+✔ Faster execution (runs directly as machine code).
+✔ More optimization (compiler optimizes performance).
+✔ Better error checking (compilation catches many issues).
+
+❌ Cons:
+✖ Slower development (code must be compiled before running).
+✖ Harder debugging (errors may not appear until compilation).
+
+ 👩‍💻 Interpreted Languages (e.g., JavaScript, Python, Ruby)
+
+How It Works:
+Code is executed line by line by an interpreter (e.g., Python interpreter).
+No separate compilation step—runs directly.
+✅ Pros:
+✔ Faster development (no need to compile first).
+✔ Easier debugging (errors appear as soon as they happen).
+
+❌ Cons:
+✖ Slower execution (since interpretation happens at runtime).
+✖ Less optimization (no deep compiler optimizations).
+
+Rust is a compiled language like C++, but with modern safety features that eliminate memory errors at compile time
+
+
+Low-level languages 🛠️ (like C or Assembly) give you direct control over memory 
+and hardware — you're close to the metal but have to manage everything yourself.
+Low-level = power + responsibility,
+
+High-level languages 🚀 (like Python or JavaScript) handle a lot for you — memory,
+types, and abstractions — so you can focus on logic instead of machine details
+high-level = convenience + safety.
+
+The Style of the code that is writen:
+
+👩‍💻 Imperative: code is written as step-by-step instructions
+
+👩‍💻  Declarative: You're declaring the outcome or logic — 
+and the language/runtime figures out the steps
+
+
+
+
+Different Paradigms of Languages (These are sub categories of
+Imperative and Declarative)
+
+
+
+👩‍💻 Object-Oriented Programming (OOP) is a philosophy of programming where you 
+structure your code around “objects” — bundles of data and behavior (methods)
+that operate on that data.
+
+👩‍💻 Functional Programming is a philosophy that treats computation as the 
+evaluation of mathematical functions and avoids changing state and mutable data
+
+👩‍💻 Sequential programming is what I would call "pure" imperative programming. 
+You have no procedures, no loops, no if-else-constructs. All you can do is perform actions after each other and jump in the code depending on some value.
+
+👩‍💻 Procedural: similar to Sequential but with reusable procedures/functions
+you add procedures, loops, if-else-constructs and some of that good stuff 
+to control the execution of your program easier.
+
+
+
+🏓 Single Paradigm Languages use only one philosophy like
+
+Haskell - which is purely a functional programming language (An example of Declarative
+language)
+COBOL - Extemely procedural
+Smalltalk - Object Oriented
+
+🏓 Multi-paradigm Language use mix of phlisohpies
+
+JS - is imperative but modern functions like map, reduce and frameworks like React
+are examples of declartive programming. JS has its own style of OOP as well as some
+functional programming. If JS was purely functional it would lose mutability of 
+variables, Loops, Objects and Classes
+
+C++ is primarily an imperative language. And a multi paradigm language with functions
+and Classes
+
+Rust is Imperative (Mostly), Declarative, OOP and Functional.
+It is also Hardcore low-level and High level Modern safety features
