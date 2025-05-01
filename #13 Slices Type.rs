@@ -33,7 +33,7 @@ fn main() {
 
     let bytes = b"Hello";   //the b just before the string converts each character into a number
     //Overall this bytes variable return an array of numbers. Where the numbers represent the
-    //character 
+    //character in utf 8
     println!("{:?}", bytes);
 
     //The as_bytes() method in Rust is used to convert a string slice (&str) into a byte array (&[u8]
@@ -52,7 +52,7 @@ fn main() {
     // / the index itself being 5 is not inherently wrong—it correctly represents 
     // where the first space was at the time the function was called. The risk comes 
     // when you try to use that index later on a modified string, which can lead to 
-    // unexpected behavior or crashes.
+    // unexpected behavior or crashes. like accessing out of bound values in an array
 }
 
 //Let us get the first word of a string without slices

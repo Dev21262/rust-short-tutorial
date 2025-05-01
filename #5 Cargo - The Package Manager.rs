@@ -18,12 +18,12 @@ $ cargo init //It will create a .toml file automatically for you
 $ cargo build //It creates and exe program inside target/debug
 //A debug build is a version of a program that is compiled with extra 
 // information to help developers test and debug the software
-//It compiles the code into machine code
+//Build compiles the code into machine code
 
 $ cargo check //It partially compiles the code
 //  without producing an exe program. Sometimes 
 // Devs just need to check for compilation errors(the do this by cargo check)
-// When they areready for producing an exe they run cargo build
+// When they are ready for producing an exe they run cargo build
 //Skips final step of producing machine code
 
 $ cargo run //We just built a project with cargo build and ran it
@@ -31,4 +31,4 @@ $ cargo run //We just built a project with cargo build and ran it
 // to compile the code and then run the resultant executable all in one 
 // command:
 
-//Cargo is the package manaager and build system of Rust
+//Cargo is the package manager and build system of Rust

@@ -1,6 +1,6 @@
-In #16 Ownership.txt Atlast we noted we can return multiple values using a tuple
-which is useful when we want to regain access of the value in the scopre where
-it was orginally passed into a function that returned some value along with the 
+In Ownership.txt Atlast we noted we can return multiple values using a tuple
+which is useful when we want to regain access of the value in the scope where
+it was orginally passed into a function. The function returned some value along with the 
 parameter it took. The problem is it is tedious to move ownership twice to 
 use it inside another function and then back in the home function
 
@@ -18,8 +18,9 @@ and they allow you to refer to some value without taking ownership of it
         //and s1 has a pointer on the stack that leads to the value on the heap
 
         let len = calculate_length(&s1); //the calculate_length function borrows
-        value of s1 by referring to. It only has read only properties. No modificat
-        ion rights. so you cannot use push_str function on s1's value
+        value of s1 by referring to through the address it borrowed. 
+        It only has read only properties. No modification rights.
+         so you cannot use push_str function on s1's value
 
         //Since s1 still owns the value the macro below is a valid statement
         println!("The length of '{s1}' is {len}.");
@@ -56,8 +57,7 @@ and modifies it.
 
 Restriction of Mutable Refrences: You cannot have more than 1 mutable 
 refrence in 1 scope. You cannot have 1 mutable refrence and 1 immutable refrence
-in the same scope
-You can borrow stack values too.
+in the same scope. Remember You can borrow stack values too.
 
     let mut s = String::from("hello");
 
@@ -138,6 +138,17 @@ fn main() {
     println!("{}", r2);
 }
 
+fn main() {
+    let s = String::from("Hello");
+
+    let r1 = &s;     // Immutable reference to s
+    let r2 = &mut r1; // ❌ Mutable reference to r1
+
+    println!("{}", r2); 
+    ❌ This is NOT valid Rust. It won’t compile.
+}
+
+
 A dangling pointer (or dangling reference) occurs when a reference points to memory
 that has been freed or is no longer valid
 
@@ -165,4 +176,5 @@ fn dangle() -> &String {
 }
 Ownership is moved out, and nothing is deallocated.
 Rust doesn’t let you mutate or even shadow a value while it’s still borrowed, even immutably
+
 A tuple no matter if some of its values are heap allocated is stored on stack nevertheless.

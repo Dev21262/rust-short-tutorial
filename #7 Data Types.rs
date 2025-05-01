@@ -10,8 +10,8 @@ fn main() {
     //Rust is a statically typed language which means type of the variables
     //are defined at compiletime for this user....
     
-    //JS is a dynamically typed language meaning types of the variables are
-    //figured out during running the code
+    //JS is a dynamically typed language meaning data type of the variables are
+    //figured out during running the code (runtime)
     
     let _guess: u32 = "42".parse().expect("Not a number!");
     
@@ -58,7 +58,7 @@ fn main() {
             // Rust does not include checks for integer overflow that cause panics
             // Instead The value 256 becomes 0, the value 257 becomes 1, and so on.
 
-        //Default Integer Type is i32. By default RUST doesn't assume a value to be unsigned but i32
+        //Default Integer Type is i32. By default RUST doesn't assume a numerical value to be unsigned but i32
         //  Floating-point types
             // f32 → ~7 digits (Faster, less memory, but less precise)
             // f64 → ~15-16 digits (Default in Rust, more precise)

@@ -1,4 +1,4 @@
-ASCII stands for American Standard for Information
+ASCII stands for American Standard Code for Information Interchange
 - A type of encoding for each character in english alphabets + some extras
 to the Integers represented by the Binaries (of Computer)
 
@@ -11,18 +11,18 @@ ASCII comprises only english alphabets both uppercase and lowercase
 
 The 8th bit in the full byte was unused in original ASCII — 
 but it didn’t go to waste. Different systems started using that extra bit to
- extend the character set. That’s where extended ASCII
+ extend the character set. That’s where extended ASCII comes in
 Extended ASCII used 8 bits or a byte to repesent each character
 
 say we use 3 bits
 then all possible combinations of 1 and 0 are
 0, 0, 0 = (0 + 0 + 0) = 0 = Say one character
-1, 1, 1 = (4 + 2 + 1) = 7 Say another character
-0, 1, 1 = (0 + 2 + 1) = 3 Say another character
-0, 0, 1 = (0 + 0 + 1) = 1 Say another character
-1, 0, 1 = (4 + 0 + 1) = 5 Say another character
-1, 0, 0 = (4 + 0 + 0) = 4 Say another character
-0, 1, 0 = (0 + 2 + 0) = 2 Say another character
+1, 1, 1 = (4 + 2 + 1) = 7 = Say another character
+0, 1, 1 = (0 + 2 + 1) = 3 = Say another character
+0, 0, 1 = (0 + 0 + 1) = 1 = Say another character
+1, 0, 1 = (4 + 0 + 1) = 5 = Say another character
+1, 0, 0 = (4 + 0 + 0) = 4 = Say another character
+0, 1, 0 = (0 + 2 + 0) = 2 = Say another character
 
 (3 Bit binary numbers) so total of 8 different character with 3 bits
 
@@ -33,7 +33,7 @@ UTF - 8 (Unicode Transformation Format that used 8 bits)
 In UTF 8 a character can be in range of 1 byte to 4 byte
 Meaning a.... (Million Characters)
 
-For characters in the range 0–127 (i.e., all standard ASCII),
+For characters whose encoding lie in the range 0–127 (i.e., all standard ASCII),
 UTF-8 uses exactly 1 byte, and it’s identical to the ASCII byte.
 Every ASCII character is valid UTF-8, and its encoding is byte-for-byte 
 identical in both formats.
@@ -60,9 +60,12 @@ UTF 8 Also encompasses all emojis
 
 Rust also uses UTF8 encoding for characters
 
+String slice - is a part of a string or sometimes even the complete string 
+
 str is just the type of a string slice — it describes what the data is, 
-but not where it is or how big it is
-&str is an immutable refrence  to a part of string or a complete string
+but not where it is or how big it is. str is almost never used in Rust.
+
+&str is an immutable reference  to a part of string or a complete string
 
 The Rust standard library provides String type. Which is the datatype that can be
 mutated, increased/decreased in size and is obviously allocated on Heap.
@@ -70,6 +73,7 @@ mutated, increased/decreased in size and is obviously allocated on Heap.
 String Literals are string slices that are stored in application's binary
 It's known at compile time.
 It’s never going to change.
+It's directly hardcoded in the program.
 It can be shared safely across the program.
 
 let x = "hello"; //its type is &str

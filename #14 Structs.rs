@@ -2,7 +2,7 @@
 // type that lets you package together and name multiple 
 // related values that make up a meaningful group
 
-//Comparable to an object if you are familiar with OOP
+//Comparable to an template object (Class) if you are familiar with OOP
 //Each struct you define is its own type
 #[derive(Debug)]
 
@@ -20,7 +20,7 @@ struct User {
 //  of that struct by specifying concrete values for each of the fields.
 fn main() {
     //Remember let cannnot be used for global variables because global variables are stored in static memory
-    //By using let we let it be mutable and mutables are stored in stack or heap
+    //By using mut we can let the struct to be mutable
         
     //Note that the entire instance must be mutable;
     //  Rust doesn’t allow us to mark only certain fields as mutable
@@ -54,7 +54,7 @@ fn main() {
 
     //instances of structs in Rust are moved unless all  of the properties implement the Copy trait. 
     //Only if the entire instance has properties with Copy trait. Else Once all the instances are moved,
-    //  none of its properties are accessible — even the ones that were stored entirely on the stack and have Copy
+    //  none of its properties are accessible — even the ones that were stored entirely on the stack and have Copy trait
 
     tuple_structs();
 }
@@ -106,3 +106,6 @@ fn tuple_structs() {
 
 //Only simple data types like integers and strings have the Display Traits others will require some additional information
 //to display on the CLI using the println! statement
+
+// If a struct contains references or other dynamically sized types (like String or Vec<T>), the struct itself is stored
+// on the stack, but parts of it (the dynamically allocated memory) are stored on the heap

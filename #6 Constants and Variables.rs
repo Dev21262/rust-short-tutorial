@@ -1,7 +1,7 @@
 // Rust’s naming convention for constants is to use all uppercase 
 // with underscores between words
 
-//Constants are valid for the entire time a program runs, 
+//Constants are valid for the entire time a program runs (Therefore they are stored in stack), 
 // within the scope in which they were declared.
 //They can only be declared in the Global Scope
 

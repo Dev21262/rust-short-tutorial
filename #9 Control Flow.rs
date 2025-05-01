@@ -15,7 +15,7 @@ fn main() {
     //}
     
     // The if condition evaluates to a value of 3 this time, and Rust throws an error: saying it got an integer and it was expecting a boolean
-    // this is unlike javascript where putting variable in the if condition simply means true
+    // this is unlike javascript where putting variable in the if condition simply means true (if they are not null or undefined)
 
     if number != 0 {
         println!("number was something other than zero");
@@ -57,7 +57,7 @@ fn main() {
         println!("{numero}");
         if numero >= 10 {
             break;
-            //The above statement tells Rust to stop the loop
+            //The above statement tells Rust to stop the loop and exit completely
         }
     }
 
@@ -65,7 +65,7 @@ fn main() {
         numero -= 1;
 
         if numero == 3 {
-            break numero * 2; //Basically return 0 to result while breaking the loop
+            break numero * 2; //Basically return 6 to the result while breaking the loop
             //continue;
             //If you use a continue statement the continuing lines in the loop are not executed and loop is run from the starting line.
             //ie - continue; statement is used within loops to skip the current iteration and move directly to the next iteration of the loop
@@ -132,6 +132,7 @@ fn main() {
     }
     //While statements for looping over an array take a lot of memory. Therefore it is advised to use for in
     for value in array {
+        //In javasccript this equivalent to for (let value of array)
         println!("The value is {value}");
     } 
 

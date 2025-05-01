@@ -4,7 +4,7 @@ in other languages, the programmer must explicitly allocate and free the memory
 Rust takes a third approach
 
 
-Adding data is called pushing onto the stack, and removing data is called popping off the stack.
+Adding data to stack is called pushing onto the stack, and removing data from it is called popping off the stack.
 All data stored on the stack must have a known, fixed size. Data with an unknown size at compile time or a size 
 that might change must be stored on the heap instead.
 
@@ -15,7 +15,7 @@ Because the pointer to the heap is a known, fixed size data, you can store the p
 but when you want the actual data, you must follow the pointer.
 
 Pushing to the stack is faster than allocating on the heap because the pusher never
-has to search for a place to store new data; that location is always at the top of the stack.
+has to search for a place to store new data; that location is always at the top of the stack (LIFO)
 
 
 _What Ownership addresses_
@@ -44,7 +44,7 @@ With the String type, in order to support a mutable, growable piece of text, we 
 unknown at compile time, to hold the contents
 
 1. The memory must be requested from the memory allocator at runtime.
-2. We need a way of returning this memory to the allocator when we’re done with our String.
+2. We need a way of returning this memory space to the allocator when we’re done with our String by cleaning up the space.
 
 That first part is done by us: when we call String::from, its implementation requests the memory it needs. 
 This is pretty much universal in programming languages.
@@ -66,7 +66,7 @@ when we want to have multiple variables use the data we’ve allocated on the he
     let y = x;
 Assigning the integer value of variable x to y We can probably guess what this is doing: “bind the value 5 to x; then make a copy 
 of the value in x and bind it to y.” We now have two variables, x and y, and both equal 5. This is indeed what is happening, 
-because integers are simple values with a known, fixed size, and these two 5 values are pushed onto the stack.
+because integers are simple values with a known and fixed size, and these two 5 values are pushed onto the stack.
 
     let s1 = String::from("hello");
     let s2 = s1;
@@ -119,7 +119,7 @@ Copying data on stack
 The code above is valid. But this code seems to contradict what we just 
 learned: we don’t have a call to clone, but x is still valid and wasn’t 
 moved into y
-The reason is that types such as integers that have a known size at compile time 
+The reason is that types such as integers that have a known max size (through the bits) at compile time 
 are stored entirely on the stack, so copies of the actual values are quick to
 make. That means there’s no reason we would want to prevent x from being valid 
 after we create the variable y
@@ -187,6 +187,6 @@ Rust does let us return multiple values using a tuple.
     fn calculate_length(s: String) -> (String, usize) {
         let length = s.len(); // len() returns the length of a String
 
-        (s, length)
+        (s, length) //We are returning the s1's value which we had took the ownership of
     }
 
