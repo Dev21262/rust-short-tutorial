@@ -128,13 +128,34 @@ enum Message {
 //  able to define methods on enums
 
 impl Message {
-    fn call(&self) { //borrows Message immutably
+    fn call(&self) -> &Message { //borrows Message immutably
         self
     }
 }
 
 let m = Message::Write(String::from("hello"));
 m.call();
+
+//The Option enum
+//Option is an enum defined by the standard library
+
+//A type system is a set of rules in
+//  a programming language that assigns a type to every piece of data 
+
+// When the possibility of "nothing" is encoded directly in the type system 
+// (like with Option<T>), you are forced to think about and handle that case.
+// This leads to safer, more predictable code and avoids common runtime bugs.
+
+// Programming language design is often thought of in terms of which features you
+//  include, but the features you exclude are important too. Rust doesn’t have the null
+//  feature that many other languages have.
+
+//Refrence = what variable points to 
+
+// In his 2009 presentation “Null References: The Billion Dollar Mistake,” 
+// Tony Hoare, the inventor of null, has this to say:
+
+
 
 fn main() {
 
