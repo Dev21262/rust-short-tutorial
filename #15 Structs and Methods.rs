@@ -18,6 +18,7 @@ fn main() {
         fn area(&self) -> u32 {    //self is Comparable to this in javascript. 
         // Use self if you want to take ownership of the properties. Use &mut self if you want to take a mutable refrence to the instance's properties
             self.width * self.height
+            //If self is used in a method and that method is called ths struct is invalidated unless it is returned back as one of the function's return value
         }   
         //You can implement multiple methods
         fn width(&self) -> bool {
