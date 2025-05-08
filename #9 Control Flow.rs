@@ -1,3 +1,7 @@
+// Control flow in programming refers to the order 
+// in which individual statements, instructions, or
+// function calls are executed or evaluated in a program
+
 fn main() {
     let number = 3;
 
