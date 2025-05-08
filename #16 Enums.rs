@@ -153,9 +153,46 @@ m.call();
 //Refrence = what variable points to 
 
 // In his 2009 presentation “Null References: The Billion Dollar Mistake,” 
-// Tony Hoare, the inventor of null, has this to say:
+// Tony Hoare, the inventor of null called it a billon dollar mistake
+// The concept of null is useful but how it is implemented in many languages is a billion dollar mistake
 
 
+//Reminding What prelude is 
+//In Rust, the prelude is a set of commonly used types, traits, 
+// and functions that are automatically imported into every Rust module 
+// — so you don't need to explicitly use them.
+
+//This is what Option<T> is defined as in the standard library's code
+
+enum Option<T> {
+    some(T),
+    None
+}
+
+let some_number = Some(5);
+let some_char = Some('e');
+
+let absent_number: Option<i32> = None;
+// For absent_number, Rust requires us to annotate the overall Option type:
+//  the compiler can’t infer the type that the corresponding Some variant will 
+//  hold by looking only at a None value. 
+// Here, we tell Rust that we mean for absent_number to be of type Option<i32>.
+
+//Below is called snake case
+let can_be_null_or_canbenot_integer: Option<i32> = Some(5);
+let an_empty_integer: Option<i32> = None;
+
+let y: i8 = -5; // Just an integer
+let mut x: Option<i8> = Some(-5); //An optional integer. Cna also be None / Null
+
+let sum = x + y;
+//Sum will be not be the sum because they both are different types
+
+//  you have to convert an Option<T> to a T before you can perform T 
+//operations with it.
+
+// Generally, this helps catch one of the most common 
+//issues with null: assuming that something isn’t null when it actually is.
 
 fn main() {
 
