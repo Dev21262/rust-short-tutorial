@@ -150,7 +150,7 @@ m.call();
 //  include, but the features you exclude are important too. Rust doesn’t have the null
 //  feature that many other languages have.
 
-//Refrence = what variable points to 
+//Reference = what variable points to 
 
 // In his 2009 presentation “Null References: The Billion Dollar Mistake,” 
 // Tony Hoare, the inventor of null called it a billon dollar mistake
@@ -183,7 +183,7 @@ let can_be_null_or_canbenot_integer: Option<i32> = Some(5);
 let an_empty_integer: Option<i32> = None;
 
 let y: i8 = -5; // Just an integer
-let mut x: Option<i8> = Some(-5); //An optional integer. Cna also be None / Null
+let mut x: Option<i8> = Some(-5); //An optional integer. Can also be None / Null
 
 let sum = x + y;
 //Sum will be not be the sum because they both are different types
