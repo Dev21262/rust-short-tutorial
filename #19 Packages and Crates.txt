@@ -1,0 +1,63 @@
+Distribuiting your Rust code into different files is what we shall learn
+in the upcoming chapters
+How it is done in rust is also called the Module System
+
+Basic Terminology
+
+Modules- 
+Think of modules as Rust’s way of organizing code into namespaces
+or folders inside your crate
+
+Crate - A crate in Rust is the smallest unit of code that can be 
+compiled and run. A crate can be a single or multiple files.
+Its a compilation unit. A crate can be compiled.
+multiple files can be compiled as one crate
+
+There are two types of crates
+    Main Crate or Binary Crate
+    Library Crate
+
+Package:
+A package is a folder with a Cargo.toml file in it that has a 
+[package] key. It is, generally, equivalent to the project root
+ directory in any language (though packages can nest as a convenience).
+A package is a bundle of one or more crates 
+that are managed together.
+A package contains a Cargo.toml file that describes
+how to build those crates
+A package can contain as many binary crates as you like,
+but at most only one library crate. 
+A package must contain at
+least one crate, whether that’s a library or binary crate.
+
+Paths: A way of naming an item, such as a struct, 
+function, or module
+
+
+More on crates
+All the crates we have created so far are Binary Crates.
+They have a main function and that file can be compiled to an exe
+
+Library crates don’t have a main function, and they don’t compile 
+to an executable.
+Instead, they define functionality intended to be shared with
+multiple projects
+
+Most of the time when Rustaceans say “crate”,
+they mean library crate, and they use “crate”
+interchangeably with the general programming
+concept of a “library”.
+
+
+Crate Root (Come to this definition after #20):
+The crate root is a source file that the Rust compiler starts 
+from and makes up the root module of your crate
+
+Open Cargo.toml in your text editor, and note there’s no mention 
+of src/main.rs. Cargo follows a convention that src/main.rs is the
+ crate root of a binary crate with the same name as the package. 
+ Likewise, Cargo knows that if the package directory contains
+  src/lib.rs, the package contains a library crate with the same
+   name as the package, and src/lib.rs is its crate root. 
+Cargo passes the crate root files to rustc to build the library 
+or binary.
