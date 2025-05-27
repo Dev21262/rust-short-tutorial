@@ -1,0 +1,93 @@
+Modules let us organize code within a crate
+for readability and easy reuse
+
+Modules are blocks of code that divides code within a 
+file. A module can also be a separate file
+
+Code within a module is private by default
+We can choose to make them public
+
+A module can also include modules
+
+main.rs - a file
+//Start of Code or File
+
+mod math {
+    pub mod algebra {
+        pub fn add(a: i32, b: i32) -> i32 {
+            a + b
+        }
+    }
+
+    pub mod vector_algebra {
+        pub fn add(a: (i32, i32), b: (i32, i32)) -> (i32, i32) {
+            (a.0 + b.0, a.1 + b.1)
+        }
+    }
+}
+
+fn main() {
+    let mut x = 50;
+    let mut y = 29;
+    let mut sum = math::algebra::add(x, y);
+    let mut vectorsum = math::vector_algebra::add(x, y);
+    A Module function can only be called inside a function
+}
+
+
+//End of Code or File
+
+You can also bring modules from a different file
+for eg - you can call mod math on the top of your file
+
+Modules can also be put into separate files or folders to keep things 
+tidy. Rust follows a convention: if you write mod math; in your main file, 
+Rust looks for a math.rs file or a math folder with a mod.rs inside it
+and brings its code into the scope.
+
+And to make stuff inside modules usable outside,
+ you mark them pub (public). Otherwise, everything
+  is private by default, so only the module itself can see it.
+
+An example of
+How a module can inlcude other modules where all of the modules 
+including the parent module lie in a separate files
+
+src/main.rs - Crate Root
+---Start of main.rs---
+mod math;
+
+fn main() {
+    let a = 3;
+    let b = 4;
+    let int_sum = math::algebra::add(a, b);
+    println!("Sum: {}", int_sum);
+
+    let v1 = (1, 2);
+    let v2 = (3, 4);
+    let vec_sum = math::vector_algebra::add(v1, v2);
+    println!("Vector Sum: {:?}", vec_sum);
+}
+---End of main.rs---
+
+src/math.rs - A Module
+---Start of math.rs----
+pub mod algebra;
+pub mod vector_algebra;
+---End of math.rs----
+
+src/algebra.rs - A sub module of the math module
+---Start of alebgra.rs----
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+---End of alebgra.rs----
+
+src/vector_algebra.rs A sub module of the math module
+---Start of vector_algebra.rs----
+pub fn add(a: (i32, i32), b: (i32, i32)) -> (i32, i32) {
+    (a.0 + b.0, a.1 + b.1)
+}
+---End of vector_algebra.rs----
+
+Some modules can be siblings
