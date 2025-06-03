@@ -70,6 +70,9 @@ enum IpAddr {
 let home = IpAddr::V4(127, 0, 0, 1);
 let loopback = IpAddr::V6(String::from("::1"));
 
+//An enum variant is not its own type in Rust. 
+// All the variants are just different values of the same enum type.
+
 
 //In rust's standard library IpAddr is a reserved word which takes a particular variant
 //And that variant passed must be a struct which contain bundle of multiple related

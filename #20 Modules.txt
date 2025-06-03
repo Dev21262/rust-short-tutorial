@@ -51,7 +51,7 @@ And to make stuff inside modules usable outside,
 
 An example of
 How a module can inlcude other modules where all of the modules 
-including the parent module lie in a separate files
+including the parent module lie in separate files
 
 src/main.rs - Crate Root
 ---Start of main.rs---

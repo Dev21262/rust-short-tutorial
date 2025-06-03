@@ -18,7 +18,7 @@ There are two types of crates
     Library Crate
 
 Package:
-A package is a folder with a Cargo.toml file in it that has a 
+A package is your project folder with a Cargo.toml file in it that has a 
 [package] key. It is, generally, equivalent to the project root
  directory in any language (though packages can nest as a convenience).
 A package is a bundle of one or more crates 

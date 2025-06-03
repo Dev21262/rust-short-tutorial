@@ -5,7 +5,7 @@ A path can take two forms:
 
 1. An absolute path is the full path starting from a crate root;
 for code from an external crate, 
-the absolute path begins with the crate name,
+the absolute path begins with the crate name (which is also the package name),
  
 and for code from the current crate,
 it starts with the word 'crate'
@@ -48,7 +48,7 @@ mod back_of_house {
     fn fix_incorrect_order() {
         cook_order();
         super::deliver_order(); 
-        //Super refers to the parent module and then we use th function
+        //Super refers to the parent module and then we use the function
     }
 
     fn cook_order() {}
@@ -79,7 +79,7 @@ fields will still be private.
 
 mod back_of_house {
     pub struct Breakfast {
-        pub toast: String,
+        pub toast: String, //whenever a breakfast struct will be created seasonal fruit will be inaccessible
         seasonal_fruit: String,
     }
 
@@ -105,4 +105,23 @@ pub fn eat_at_restaurant() {
     // The next line won't compile if we uncomment it; we're not allowed
     // to see or modify the seasonal fruit that comes with the meal.
     // meal.seasonal_fruit = String::from("blueberries");
+}
+
+//Note that for creating a struct with a private field we need to used
+// a function that is provided by the programmer so we can put value
+// to the private field without conflict
+// In other words we need an associated function along the struct
+//to build an instance of the struct if it has atleast on private field
+
+//An example of a public enum
+mod back_of_house {
+    pub enum Appetizer {
+        Soup,
+        Salad,
+    }
+}
+
+pub fn eat_at_restaurant() {
+    let order1 = back_of_house::Appetizer::Soup;
+    let order2 = back_of_house::Appetizer::Salad;
 }
