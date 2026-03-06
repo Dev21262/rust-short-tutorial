@@ -20,7 +20,7 @@ fn another_function(x: u8) {
     println!("Another function. Hey the number is {x}");
     const LOL: &str = "SSS";
     let y = {
-        let x = 3;
+        let x = 3; //This shadows the parameter x
         x + 1
 
         //Note that the x + 1 line doesn’t have a semicolon at the end, which is unlike most of the lines 
@@ -42,6 +42,7 @@ fn main() {
     let summation = {
         sum(900, 2900) + 21262
     };
+    //Since sum(900, 2900) + 21262 does end with a semicolon it is an expression and returns a value 
     println!("{summation}");
 }
 

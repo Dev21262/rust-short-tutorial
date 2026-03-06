@@ -12,13 +12,19 @@ fn main() {
         println!("condition was false");
     }
 
+    let x = 5;
+    if x > 0 && x < 10 {
+        println!("x is between 0 and 10");
+    }
+    //For OR we use || in rust
+
     //Shadowing
     let number = 53;
     //if number {
         println!("number was three");
     //}
     
-    // The if condition evaluates to a value of 3 this time, and Rust throws an error: saying it got an integer and it was expecting a boolean
+    // The if condition evaluates to a value of 53 this time, and Rust throws an error: saying it got an integer and it was expecting a boolean
     // this is unlike javascript where putting variable in the if condition simply means true (if they are not null or undefined)
 
     if number != 0 {
@@ -136,7 +142,7 @@ fn main() {
     }
     //While statements for looping over an array take a lot of memory. Therefore it is advised to use for in
     for value in array {
-        //In javasccript this equivalent to for (let value of array)
+        //In javasccript this equivalent to for (let value of array) {}
         println!("The value is {value}");
     } 
 

@@ -50,7 +50,7 @@ That first part is done by us: when we call String::from, its implementation req
 This is pretty much universal in programming languages.
 
 In the second part.
-In most languages without a GC, it’s our responsibility to identify when memory is no longer being used and to call
+In most languages without a GC (Garbage collector), it’s our responsibility to identify when memory is no longer being used and to call
 code to explicitly free it, just as we did to request it
 Doing this correctly has historically been a difficult programming problem. If we forget, we’ll waste memory.
  If we do it too early, we’ll have an invalid variable. If we do it twice, that’s a bug too. 
@@ -64,12 +64,16 @@ when we want to have multiple variables use the data we’ve allocated on the he
 
     let x = 5;
     let y = x;
+ABOVE: Listing 4-1: Assigning the integer value of variable x to y
+
 Assigning the integer value of variable x to y We can probably guess what this is doing: “bind the value 5 to x; then make a copy 
 of the value in x and bind it to y.” We now have two variables, x and y, and both equal 5. This is indeed what is happening, 
 because integers are simple values with a known and fixed size, and these two 5 values are pushed onto the stack.
 
     let s1 = String::from("hello");
     let s2 = s1;
+ABOVE: Listing 4-2: Assigning the integer value of variable x to y
+
 This looks very similar, so we might assume that the way it works would be the same: that is, 
 the second line would make a copy of the value in s1 and bind it to s2
 
@@ -121,7 +125,7 @@ learned: we don’t have a call to clone, but x is still valid and wasn’t
 moved into y
 The reason is that types such as integers that have a known max size (through the bits) at compile time 
 are stored entirely on the stack, so copies of the actual values are quick to
-make. That means there’s no reason we would want to prevent x from being valid 
+make. That means there’s no reason we would want to prevent x from being invalid 
 after we create the variable y
 
 Integers (i8, i16, i32, i64, i128, u8, u16, u32, u64, u128, isize, usize)
@@ -135,7 +139,7 @@ Above data types are stored on stack and when they are copied. Their value are
 copied for assigning to a new variable. They are said to have the Copy trait
 
 The mechanics of passing a value to a function are similar to those when assigning
- a value to a  variable. Passing a variable to a function will move or copy, 
+ a value to a variable. Passing a variable to a function will move or copy, 
  just as assignment does
 
     fn main() {
@@ -187,6 +191,6 @@ Rust does let us return multiple values using a tuple.
     fn calculate_length(s: String) -> (String, usize) {
         let length = s.len(); // len() returns the length of a String
 
-        (s, length) //We are returning the s1's value which we had took the ownership of
+        (s, length) //We are returning the s1's value back to where it came from (which we had took the ownership from main)
     }
 

@@ -120,12 +120,14 @@ fn main() {
 
             let mut arr = [1, 2, 3];
             arr = [7, 8, 9]; // valid
+            arr[0] = 50; // Also valid
 
             // let mut a = [1, 2, 3];
             // a = [4, 5, 6, 7]; // error: cannot change length of an array
 
             //let mut t = (1, 2);
             // t = (1, 2, 3); // error: cannot change length of tuple
+
             let mut t = (1, 2);
             t = (9, 5); // valid
             t.0 = 10; //Also valid
