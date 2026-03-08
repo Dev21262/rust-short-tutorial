@@ -15,7 +15,7 @@ In Programming Memory Management is to manage how data is being in the volatile 
 
 #Regions in Volatile Memory
 - Static (or Data) Memory
-    Stores global (Both Mutable and Immutable), constants and static variables.
+    Stores global (Both Mutable (too -> when done explicitlu using static) and Immutable ), constants and static variables.
     String Literals.
     Program's Binary
     Allocated at program startup and exists throughout the program’s execution.

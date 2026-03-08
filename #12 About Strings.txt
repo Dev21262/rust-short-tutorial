@@ -85,7 +85,7 @@ not all &str values are string literals.
 let s = String::from("hello");
 let slice: &str = &s; // slice is a &str, but NOT a string literal
 
-A refrence always lives on the stack. As It contains only an address 
+A reference always lives on the stack. As It contains only an address 
 Static memory is part of the binary executable file.
 
 🔸 In Rust, .to_string():

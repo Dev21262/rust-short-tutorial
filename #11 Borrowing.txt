@@ -55,8 +55,8 @@ value it borrows.
 The value of s will change because change(&mut s) borrows s mutably
 and modifies it.
 
-Restriction of Mutable Refrences: You cannot have more than 1 mutable 
-refrence in 1 scope. You cannot have 1 mutable refrence and 1 immutable refrence
+Restriction of Mutable References: You cannot have more than 1 mutable 
+reference in 1 scope. You cannot have 1 mutable reference and 1 immutable reference
 in the same scope. Remember You can borrow stack values too.
 
     let mut s = String::from("hello");
@@ -66,7 +66,7 @@ in the same scope. Remember You can borrow stack values too.
 
     println!("{}, {}", r1, r2);
 
-Mutable refrences in different scope
+Mutable references in different scope
     let mut s = String::from("hello");
 
     {
@@ -75,7 +75,7 @@ Mutable refrences in different scope
 
     let r2 = &mut s; ///No Problem
 
-Existence of mutable and immutable refrence together is a BIG PROBLEM
+Existence of mutable and immutable reference together is a BIG PROBLEM
     let mut s = String::from("hello");
 
     let r1 = &s; // no problem
@@ -85,7 +85,7 @@ Existence of mutable and immutable refrence together is a BIG PROBLEM
 
 
 What you can have
-Multiple immutable refrences in the same scope. Since no one is modifying what they
+Multiple immutable references in the same scope. Since no one is modifying what they
 are reading. They will be at peace
 A mutable reference (&mut) modifies the original value.
 

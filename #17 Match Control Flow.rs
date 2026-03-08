@@ -56,6 +56,9 @@ enum Message {
     ChangeColor(u8, u8, u8),
 }
 
+//Binding just means name for local piece of data. Think of it like name of parameters
+//Bindings take their value from the thing that is being match in this case msg which is an enum variant of our wish
+
 fn process(msg: Message) {
     match msg {
         Message::Quit => {
@@ -81,8 +84,11 @@ fn main() {
     process(m); //The values x, y of move struct (a variant) of the enum are moved which are binded for use
 }
 
+//For i32, these bindings are copied because integers are Copy.
+//For non-Copy types (like String), the binding moves the value unless you use a reference.
+
 // The other keyword for handling all other cases. We can bind value of other to a function 
-// Which will not be possible when we just _
+// Which will not be possible when we just _ -> for other purpose
 
 let dice_roll = 9;
 match dice_roll {
