@@ -11,7 +11,7 @@ or folders inside your crate
 Crate - A crate in Rust is the smallest unit of code that can be 
 compiled and run. A crate can be a single or multiple files.
 Its a compilation unit. A crate can be compiled.
-multiple files can be compiled as one crate
+Multiple files can be compiled as one crate
 
 There are two types of crates
     Main Crate or Binary Crate
